@@ -1,0 +1,89 @@
+.pagination>li {
+display: inline;
+padding:0px !important;
+margin:0px !important;
+border:none !important;
+}
+.modal-backdrop {
+  z-index: -1 !important;
+}
+/*
+Fix to show in full screen demo
+*/
+iframe
+{
+    height:700px !important;
+}
+
+.btn {
+display: inline-block;
+padding: 6px 12px !important;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+background-image: none;
+border: 1px solid transparent;
+border-radius: 4px;
+}
+
+.btn-primary {
+color: #fff !important;
+background: #727579 !important;
+border-color: #727579 !important;
+box-shadow:none !important;
+}
+.btn-danger {
+color: #fff !important;
+background: #e0908e !important;
+border-color: #e0908e !important;
+box-shadow:none !important;
+}
+p {
+  margin: 0px 0px !important;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+	
+	padding: 5px ;
+}
+.table-responsive{
+  background-color: transparent;
+  color: #FFF;
+  font-weight: bold;
+}
+.table {
+  background-color: aliceblue !important;
+}
+thead{
+  background: #757373 !important;
+}
+.paginate_button .page-item .active
+{
+  background: #727579 !important;
+  border-color: #727579 !important;
+  color: #FFF;
+  font-weight: bold;
+}
+.page-link{
+  background: #727579 !important;
+  border-color: #727579 !important;
+  color: #FFF;
+  font-weight: bold;
+}
+.paginate_button .page-item .previous .disabled
+{
+  background: #727579 !important;
+  border-color: #727579 !important;
+  color: #FFF;
+  font-weight: bold;
+}
