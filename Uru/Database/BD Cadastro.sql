@@ -6,6 +6,7 @@ create if not exists semanal(
     dateSem date not null,
     taskSem varchar(200),
     cod_estudante int(10) not null,
+    completed int(1),
     foreign key (cod_estudante) references usuario(cod_estudante)
 
 );

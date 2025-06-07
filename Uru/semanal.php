@@ -7,14 +7,13 @@
         <?php session_start(); ?>
         <script src="./js/jquery-3.5.1.js"></script>
         <script src="./js/jquery.min.js"></script>
-        <script src="./js/calendario.js"></script>
+        <script src="./js/semanal.js"></script>
     </head>
 
     <body>
         <?php include "./includes/navbar.inc"; ?>
 
         <div id="tasks" >
-            <input type="hidden" name="curTask" id="curTask">
 
             <?php
                 include "./includes/databaseConection.inc";
@@ -102,7 +101,7 @@
                                 "<div id=\"tasks\">
                                 
                                 </div>".
-                                "<input value=\"+\" type=\"button\" name=\"".$dataMostrar->format("Y-m-d")."\" id-\"".$dataMostrar->format("Y-m-d")."\">".
+                                "<input value=\"+\" class=\"addSemTask\" type=\"button\" name=\"".$dataMostrar->format("Y-m-d")."\" id-\"".$dataMostrar->format("Y-m-d")."\">".
                                 "</div>";
                                }
                             }
@@ -169,11 +168,13 @@
         </div>
         
         <br><br>
-        
-        <input type="button" name="addTask" id="addTask" value="Adicionar Tarefa">
     
-        <div id="cadTask">
-
+        <div id="cadTask" hidden>
+            <form method="post">
+                <input type="hidden" name="dateSemTask" id="dateSemTask">
+                <input type="text" name="semTask" id="semTask">
+                <input type="submit" value="Enviar">
+            </form>
         </div>
 
         <div id="editTab" hidden>
