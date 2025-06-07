@@ -81,6 +81,7 @@
                     echo "<div style=\"display: flex; justify-content: space-around; align-items: space-around;\">";
                     for($j = 0; $j<7; $j++){
                             $dataMostrar->setDate(date('Y'), date('m'), date('d')+$acumulo);
+                            $dados = getDados($dataMostrar->format("Y-m-d"));
                         if($i == 0){
                             if($j == 0 && $dataMostrar->format('l') != "Sunday"){
                                 $acumulo--;
@@ -98,9 +99,9 @@
                                }else{
                                  echo "<div style=\"background-color: bisque; width: 15rem; height: 35rem; margin: 5px;\">"
                                 ."<p>".toPortuguese($dataMostrar->format('l'))."</p>".
-                                "<div id=\"tasks\">
+                                "<div id=\"tasks\">".
                                 
-                                </div>".
+                                "</div>".
                                 "<input value=\"+\" class=\"addSemTask\" type=\"button\" name=\"".$dataMostrar->format("Y-m-d")."\" id-\"".$dataMostrar->format("Y-m-d")."\">".
                                 "</div>";
                                }
@@ -161,7 +162,10 @@
                     }
                 }
 
-
+                function getDados($data){
+                    include "./includes/databaseConection.inc";
+                    
+                }
 
             ?>
 
@@ -170,7 +174,7 @@
         <br><br>
     
         <div id="cadTask" hidden>
-            <form method="post">
+            <form method="post" action="semAddTaskSemanal.php">
                 <input type="hidden" name="dateSemTask" id="dateSemTask">
                 <input type="text" name="semTask" id="semTask">
                 <input type="submit" value="Enviar">
