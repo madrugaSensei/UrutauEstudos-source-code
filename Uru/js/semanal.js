@@ -16,6 +16,12 @@ $("#dateSemTask").attr("value", $(this).attr("name"));
 
 });
 
-
+$(".checkSem").click(function (){
+    if($("#"+$(this).attr("value")).attr("value") == "0"){
+        $("#"+$(this).attr("value")).attr("value", 1);
+    }else{
+        $("#"+$(this).attr("value")).attr("value", 0);
+    }
+});
 
 });

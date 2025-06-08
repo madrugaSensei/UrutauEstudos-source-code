@@ -121,9 +121,9 @@
                                                             $taskIndex+=4;
                                                             if($dados[$index+1] ==0){
                                                             ?>
-                                                                    <input type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
+                                                                    <input type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
                                                             <?php }else{ ?>
-                                                                    <input checked type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
+                                                                    <input checked type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
                                                             <?php } ?>        
                                                                     <?php echo $d;?>
                                                                 </label><br>
@@ -325,7 +325,7 @@
             for($i = 0; $i<$qtd;$i++){
 
             ?>
-            <input type="hidden" name=<?php echo $idsToSave[$i] ?> value=<?php echo $progressionToSave[$i]; ?>>
+            <input type="hidden" name=<?php echo $idsToSave[$i] ?> id=<?php echo $idsToSave[$i] ?> value=<?php echo $progressionToSave[$i]; ?>>
 <?php
             }
         ?>
