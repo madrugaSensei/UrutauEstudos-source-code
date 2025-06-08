@@ -13,6 +13,6 @@ for($i = $min; $i<=$max;$i++){
     }
 }
 
-//header("location: semanal.php");
+header("location: semanal.php");
 
 ?>
