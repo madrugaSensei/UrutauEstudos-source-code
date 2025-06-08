@@ -19,6 +19,11 @@
         include "./includes/databaseConection.inc";
 
         $user = $_SESSION["user"];
+        $qtd = 0;
+        $idsToSave = [];
+        $progressionToSave = [];
+        $maxID = 0;
+        $minID = 1000000000;
 
         $retorno = $mysqlc->query("select cod_estudante from usuario where username = \"" . $user . "\";");
         if ($retorno->num_rows > 0) {
@@ -89,29 +94,57 @@
                         $acumulo--;
                         $j--;
                     } else {
-                        echo $dataMostrar->format("Y-m-d");
+                       // echo $dataMostrar->format("Y-m-d");
                         $acumulo++;
-                       print_r($dados);
+                       //print_r($dados);
                       
-                        if (isset($dados["TaskSem"])) {
+                        if (is_array($dados)) {
                             if (date("l") == $dataMostrar->format("l")) { ?>
                                 <div style="background-color: blue; width: 15rem; height: 35rem; margin: 5px;">
                                     <p><?php echo toPortuguese($dataMostrar->format('l')) ?></p>
                                     <div id="tasks">
-                                        <?php
-                                        foreach ($dados as $d) {
-                                            if ($d["completed"] == 0) {
-                                                ?>
-
-                                                <input type="checkbox" value=<?php echo $d["taskSem"] ?>>
 
                                                 <?php
-                                            } else { ?>
-                                                <input checked type="checkbox" value=<?php echo $d["taskSem"] ?>>
+                                                    $dataIndex = 0;
+                                                    $taskIndex = 1;
+                                                    $completedIndex = 2;
+                                                    $idIndex = 3;
+                                                    foreach($dados as $index => $d){
+                                                        if($index == $dataIndex){
+                                                            $dataIndex+=4;
+                                                            $qtd++;
+                                                            ?>
+                                                                <label for=<?php echo $d;?>>
+                                                            <?php
+                                                        }
+                                                        if($index == $taskIndex){
+                                                            $taskIndex+=4;
+                                                            if($dados[$index+1] ==0){
+                                                            ?>
+                                                                    <input type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
+                                                            <?php }else{ ?>
+                                                                    <input checked type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
+                                                            <?php } ?>        
+                                                                    <?php echo $d;?>
+                                                                </label><br>
+                                                            <?php
+                                                        }
+                                                        if($index == $completedIndex){
+                                                            $completedIndex+=4;
+                                                            array_push($progressionToSave, $d);
+                                                        }if($index == $idIndex){
+                                                            $idIndex+=4;
+                                                            array_push($idsToSave, $d);
+                                                            if($d > $maxID){
+                                                                $maxID = $d;
+                                                            }
+                                                            if($d < $minID){
+                                                                $minID = $d;
+                                                            }
+                                                        }
 
-                                            <?php }
-                                        }
-                                        ?>
+                                                    }
+                                                ?>                                               
                                     </div>
                                     <input value="+" class="addSemTask" type="button" name=<?php echo $dataMostrar->format("Y-m-d") . "\" id-\"" . $dataMostrar->format("Y-m-d") ?>>
                                 </div>
@@ -120,20 +153,40 @@
                                 <div style="background-color: bisque; width: 15rem; height: 35rem; margin: 5px;">
                                     <p><?php echo toPortuguese($dataMostrar->format('l')) ?></p>
                                     <div id="tasks">
-                                        <?php
-                                        foreach ($dados as $d) {
-                                            if ($d["completed"] == 0) {
-                                                ?>
+                                         <?php
+                                                    $dataIndex = 0;
+                                                    $taskIndex = 1;
+                                                    $completedIndex = 2;
+                                                    $idIndex = 3;
+                                                    foreach($dados as $index => $d){
+                                                        if($index == $dataIndex){
+                                                            $dataIndex+=4;
+                                                            $qtd++;
+                                                            ?>
+                                                                <label for=<?php echo $d;?>>
+                                                            <?php
+                                                        }
+                                                        if($index == $taskIndex){
+                                                            $taskIndex+=4;
+                                                            if($dados[$index+1] ==0){
+                                                            ?>
+                                                                    <input type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
+                                                            <?php }else{ ?>
+                                                                    <input checked type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
+                                                            <?php } ?>        
+                                                                    <?php echo $d;?>
+                                                                </label>
+                                                            <?php
+                                                        }
+                                                        if($index == $completedIndex){
+                                                            $completedIndex+=4;
+                                                        }if($index == $idIndex){
+                                                            $idIndex+=4;
+                                                            array_push($idsToSave, $d);
+                                                        }
 
-                                                <input type="checkbox" value=<?php echo $d["taskSem"] ?>>
-
-                                                <?php
-                                            } else { ?>
-                                                <input checked type="checkbox" value=<?php echo $d["taskSem"] ?>>
-
-                                            <?php }
-                                        }
-                                        ?>
+                                                    }
+                                                ?>           
                                     </div>
                                     <input value="+" class="addSemTask" type="button" name=<?php echo $dataMostrar->format("Y-m-d") . "\" id-\"" . $dataMostrar->format("Y-m-d") ?>>
                                 </div>
@@ -219,14 +272,20 @@
         {
             include "./includes/databaseConection.inc";
 
-            //echo $data." - ";
+            //echo $userId." - ". $data." / ";
             if (isset($userId)) {
-                $result = $mysqlc->query("select dateSem, taskSem, completed from semanal where cod_estudante = $userId && dateSem = $data;");
+                $result = $mysqlc->query("select dateSem, taskSem, completed, idSem from semanal 
+                where cod_estudante = $userId && dateSem = \"$data\";");
                 //print_r($result);
                 if ($result->num_rows > 0) {
-                    //$taskList = $result->fetch_row();
-                    $taskList = $result->fetch_array();
+                    $taskList = $result->fetch_row();
+                   // 
+                    for($i =1;$i<$result->num_rows;$i++){
+                        $taskList = array_merge($result->fetch_row(), $taskList);
+                    }
                     //echo $taskList["taskSem"];
+                    //print_r($taskList);
+
                     return $taskList;
 
                 }
@@ -256,6 +315,22 @@
             <input type="submit" value="Salvar Alterações">
         </form>
         <input type="button" id="cancel" name="cancel" value="cancel">
+    </div>
+
+    <div id="SaveEdits">
+        <form method="get">
+            <input type="hidden" name="min" value=<?php echo $minID; ?>>
+            <input type="hidden" name="max" value=<?php echo $maxID; ?>>
+        <?php
+            for($i = 0; $i<$qtd;$i++){
+
+            ?>
+            <input type="hidden" name=<?php echo $idsToSave[$i] ?> value=<?php echo $progressionToSave[$i]; ?>>
+<?php
+            }
+        ?>
+        <input type="submit" value="Salvar Alterações">
+        </form>
     </div>
 
 </body>
