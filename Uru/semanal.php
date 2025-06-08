@@ -121,9 +121,9 @@
                                                             $taskIndex+=4;
                                                             if($dados[$index+1] ==0){
                                                             ?>
-                                                                    <input type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
+                                                                    <input type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
                                                             <?php }else{ ?>
-                                                                    <input checked type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $d ?>>
+                                                                    <input checked type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
                                                             <?php } ?>        
                                                                     <?php echo $d;?>
                                                                 </label><br>
@@ -305,16 +305,6 @@
             <input type="text" name="semTask" id="semTask">
             <input type="submit" value="Enviar">
         </form>
-    </div>
-
-    <div id="editTab" hidden>
-        <form action="editTask.php" method="post">
-            <input type="hidden" name="id" id="idToEdit">
-            <input type="date" name="editDate" id="editDate">
-            <input type="text" name="editTask" id="editTask">
-            <input type="submit" value="Salvar Alterações">
-        </form>
-        <input type="button" id="cancel" name="cancel" value="cancel">
     </div>
 
     <div id="SaveEdits">
