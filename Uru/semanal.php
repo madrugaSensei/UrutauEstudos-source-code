@@ -308,7 +308,7 @@
     </div>
 
     <div id="SaveEdits">
-        <form method="get">
+        <form method="get" action="saveProgression.php">
             <input type="hidden" name="min" value=<?php echo $minID; ?>>
             <input type="hidden" name="max" value=<?php echo $maxID; ?>>
         <?php
