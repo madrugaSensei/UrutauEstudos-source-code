@@ -126,6 +126,10 @@
                                                                     <input checked type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
                                                             <?php } ?>        
                                                                     <?php echo $d;?>
+                                                                    <form action="removeSemTask.php" method="post">
+                                                                        <input type="hidden" name="id" value="<?=$dados[$index+2]?>">
+                                                                        <input type="submit" value="Del">
+                                                                    </form>
                                                                 </label><br>
                                                             <?php
                                                         }
@@ -153,7 +157,8 @@
                                 <div style="background-color: bisque; width: 15rem; height: 35rem; margin: 5px;">
                                     <p><?php echo toPortuguese($dataMostrar->format('l')) ?></p>
                                     <div id="tasks">
-                                         <?php
+
+                                                <?php
                                                     $dataIndex = 0;
                                                     $taskIndex = 1;
                                                     $completedIndex = 2;
@@ -170,23 +175,34 @@
                                                             $taskIndex+=4;
                                                             if($dados[$index+1] ==0){
                                                             ?>
-                                                                    <input type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
+                                                                    <input type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
                                                             <?php }else{ ?>
-                                                                    <input checked type="checkbox" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
+                                                                    <input checked type="checkbox" class="checkSem" id=<?php echo $dados[$index-1];?> value=<?php echo $dados[$index+2]; ?>>
                                                             <?php } ?>        
                                                                     <?php echo $d;?>
-                                                                </label>
+                                                                    <form action="removeSemTask.php" method="post">
+                                                                        <input type="hidden" name="id" value="<?=$dados[$index+2]?>">
+                                                                        <input type="submit" value="Del">
+                                                                    </form>
+                                                                </label><br>
                                                             <?php
                                                         }
                                                         if($index == $completedIndex){
                                                             $completedIndex+=4;
+                                                            array_push($progressionToSave, $d);
                                                         }if($index == $idIndex){
                                                             $idIndex+=4;
                                                             array_push($idsToSave, $d);
+                                                            if($d > $maxID){
+                                                                $maxID = $d;
+                                                            }
+                                                            if($d < $minID){
+                                                                $minID = $d;
+                                                            }
                                                         }
 
                                                     }
-                                                ?>           
+                                                ?>                                               
                                     </div>
                                     <input value="+" class="addSemTask" type="button" name=<?php echo $dataMostrar->format("Y-m-d") . "\" id-\"" . $dataMostrar->format("Y-m-d") ?>>
                                 </div>
