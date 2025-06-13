@@ -1,4 +1,6 @@
 <?php
+include "includes/databaseConection.inc";
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_FILES['diplomas']) && $_FILES['diplomas']['error'] == 0) {
     $diretorio_destino = '../Uploads/diplomas/';
@@ -19,10 +21,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       echo "Upload realizado com sucesso!";
     } else {
       echo "Erro ao mover o arquivo.";
+      header("location: teacherCad.php");
     }
   } else {
     echo "Erro no upload.";
   }
+}
+
+$nome = $_POST["name"];
+$dateNasc = $_POST["dateNasc"];
+$email = $_POST["email"];
+$graduation = $_POST["formation"];
+$user = $_POST["userName"];
+$pass = $_POST["password"];
+$cpass = $_POST["comPassword"];
+
+
+if($pass != $cpass){
+  $_SESSION["log"] = "As senhas não coincidem";
+  header("location: teacherCad.php");
 }
 
 

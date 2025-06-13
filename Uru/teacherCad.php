@@ -25,7 +25,7 @@
             <input type="text" max="100" name="name" id="name">
             <input type="date" name="dateNasc" id="dateNasc">
             <input type="email" name="email" id="email">
-            <select>
+            <select name="formation">
                 <option value="g">Graduado</option>
                 <option value="pg">Pós-Graduado</option>
                 <option value="m">Mestrado</option>
