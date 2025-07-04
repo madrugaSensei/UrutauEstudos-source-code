@@ -1,0 +1,84 @@
+.diasemana{
+    background-color: #a7c6d6;
+    color: #ffffff;
+    text-align: center;
+    font-size: 40px;
+    width: 215px;
+    height: 82px;
+    border-radius: 35px;
+
+}
+
+.linhasemana{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.check{
+    background-color: #a7c6d6;
+    width: 215px;
+    height: 500px;
+    border-radius: 35px;
+   
+    justify-content: center; /*horizontal*/
+    align-items:end !important; /*vertical*/
+}
+
+.check button{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: end !important; */
+}
+
+.linhacheck{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn3{
+    display: flex;
+    background-color: transparent;
+    border-color: transparent;
+    justify-content: center; /*horizontal*/
+    justify-content: center; /*horizontal*/
+    align-items:end !important; /*vertical*/
+}
+
+.coisas{
+    display: flex;
+    /* justify-content: start; */
+    /* align-items: start; */
+    border-radius: 50%;
+}
+
+.mais{
+    display: flex;
+    justify-content: center; 
+    align-items: end !important; 
+}
+
+.checkk{
+    display: none;
+}
+
+.customizar{
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.checkk:checked + label .customizar{
+    background-image: url(/imagens/certo-Photoroom.png);
+    background-size: cover;
+}
+
+checkk:not(:checked) + label .customizar{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: #000000;
+}
